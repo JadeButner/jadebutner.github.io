@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behind the Scenes | Jade Butner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Sun spots background - scrolls with page */
+        .sun-spots-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            min-height: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .sun-spots {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: 0%;
+            bottom: 0%;
+            background:
+                /* 10 GRAIN SPECKS */
+                radial-gradient(circle 4px at 5% 10%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 6px at 66.5% 85%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 4px at 95% 15%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 5px at 50% 92%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 3px at 5% 50%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 5px at 95% 59%, rgba(255, 200, 150, 0.35) 0%, transparent 100%);
+            opacity: 0.6;
+            filter: blur(0.3px) contrast(1.1);
+            mix-blend-mode: screen;
+        }
+
+        /* Ensure content sits above the sun spots */
+        .main-content,
+        header,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            background: #1E1F22;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Remove image labels on hover */
+        .bts-image-overlay {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sun spots background -->
+    <div class="sun-spots-wrapper">
+        <div class="sun-spots"></div>
+    </div>
+
+    <!-- Sticky Header (exactly as given) -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo-link">
+                <h1>JADE <span>BUTNER</span></h1>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">About</a>
+            <a href="productions.html">Productions</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="bts-header">
+            <h2>Behind the Scenes</h2>
+            <p>A glimpse into the moments between takes, the setups ... the magic.</p>
+        </div>
+
+        <!-- BTS Gallery: combined all images -->
+        <div class="bts-gallery">
+            <div class="bts-image-grid">
+                <!-- DC Droughin -->
+                <div class="bts-image-item" data-caption="DC Droughin BTS">
+                    <img src="BTS/DC_Droughin-BTS-1.jpg" alt="DC Droughin BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="DC Droughin BTS">
+                    <img src="BTS/DC_Droughin-BTS-2.jpg" alt="DC Droughin BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="DC Droughin BTS">
+                    <img src="BTS/DC_Droughin-BTS-3.jpg" alt="DC Droughin BTS" onerror="this.style.display='none'">
+                </div>
+                <!-- The Cave -->
+                <div class="bts-image-item" data-caption="The Cave BTS">
+                    <img src="BTS/The_Cave-BTS-1.png" alt="The Cave BTS" onerror="this.style.display='none'">
+                </div>
+                <!-- Witness Me -->
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-1.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-2.jpg" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-3.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-4.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-5.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-6.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-7.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-8.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-9.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-10.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-11.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-12.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+                <div class="bts-image-item" data-caption="Witness Me BTS">
+                    <img src="BTS/Witness_Me-BTS-13.png" alt="Witness Me BTS" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
+            <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
+            <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+</html>

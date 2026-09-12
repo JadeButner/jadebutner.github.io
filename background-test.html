@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Spots + Bleach Damage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #1E1F22;
+            color: #e8e8e8;
+            min-height: 200vh;
+            padding: 40px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            background: rgba(30, 31, 34, 0.85);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 60%, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .scroll-hint {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #c0392b;
+            color: #fff;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* ====== DRAMATIC SUN SPOTS (smaller) + BLEACH DAMAGE ====== */
+        .page-wrapper {
+            position: relative;
+            min-height: 200vh;
+        }
+
+        .sun-spots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .sun-spots::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            right: -20%;
+            bottom: -20%;
+            background:
+                /* ====== SMALLER WARM SUN SPOTS ====== */
+                radial-gradient(circle 350px at 15% 20%, rgba(255, 200, 80, 0.4) 0%, transparent 70%),
+                radial-gradient(circle 400px at 80% 50%, rgba(255, 180, 70, 0.35) 0%, transparent 70%),
+                radial-gradient(circle 300px at 30% 80%, rgba(255, 210, 100, 0.3) 0%, transparent 70%),
+                radial-gradient(circle 380px at 70% 15%, rgba(255, 190, 80, 0.35) 0%, transparent 70%),
+                radial-gradient(circle 320px at 90% 85%, rgba(255, 200, 90, 0.3) 0%, transparent 70%),
+                radial-gradient(circle 250px at 50% 50%, rgba(255, 190, 80, 0.2) 0%, transparent 70%),
+                radial-gradient(circle 280px at 45% 25%, rgba(255, 195, 85, 0.25) 0%, transparent 70%),
+                radial-gradient(circle 300px at 65% 75%, rgba(255, 185, 75, 0.25) 0%, transparent 70%),
+                radial-gradient(circle 220px at 10% 55%, rgba(255, 205, 95, 0.2) 0%, transparent 70%),
+
+                /* ====== BLEACHED OUT AREAS (very light/white) ====== */
+                radial-gradient(ellipse 500px 300px at 20% 30%, rgba(255, 255, 220, 0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 350px at 75% 65%, rgba(255, 255, 210, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 500px at 50% 85%, rgba(255, 255, 230, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 350px 450px at 10% 70%, rgba(255, 255, 200, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 550px 300px at 85% 25%, rgba(255, 255, 215, 0.25) 0%, transparent 70%),
+
+                /* ====== BLEACH DRIP MARKS (vertical streaks like liquid bleach) ====== */
+                /* Drip 1 - long streak */
+                radial-gradient(ellipse 60px 500px at 25% 10%, rgba(255, 255, 240, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 40px 400px at 25% 35%, rgba(255, 255, 230, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 30px 600px at 25% 55%, rgba(255, 255, 220, 0.15) 0%, transparent 70%),
+
+                /* Drip 2 */
+                radial-gradient(ellipse 50px 450px at 55% 15%, rgba(255, 255, 240, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 35px 350px at 55% 40%, rgba(255, 255, 230, 0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 25px 500px at 55% 60%, rgba(255, 255, 220, 0.12) 0%, transparent 70%),
+
+                /* Drip 3 */
+                radial-gradient(ellipse 45px 400px at 80% 20%, rgba(255, 255, 240, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 30px 300px at 80% 45%, rgba(255, 255, 230, 0.12) 0%, transparent 70%),
+
+                /* Drip 4 */
+                radial-gradient(ellipse 35px 350px at 40% 60%, rgba(255, 255, 240, 0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 25px 250px at 40% 75%, rgba(255, 255, 230, 0.1) 0%, transparent 70%),
+
+                /* ====== CHEMICAL BURN EDGES (eating away at film borders) ====== */
+                /* Top edge burn */
+                radial-gradient(ellipse 900px 80px at 50% 0%, rgba(255, 240, 180, 0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 700px 60px at 30% 0%, rgba(255, 230, 170, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 50px at 70% 0%, rgba(255, 230, 170, 0.25) 0%, transparent 70%),
+
+                /* Bottom edge burn */
+                radial-gradient(ellipse 900px 80px at 50% 100%, rgba(255, 240, 180, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 700px 60px at 60% 100%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 50px at 40% 100%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+
+                /* Left edge burn */
+                radial-gradient(ellipse 80px 800px at 0% 50%, rgba(255, 240, 180, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 60px 600px at 0% 30%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 60px 600px at 0% 70%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+
+                /* Right edge burn */
+                radial-gradient(ellipse 80px 800px at 100% 50%, rgba(255, 240, 180, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse 60px 600px at 100% 30%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 60px 600px at 100% 70%, rgba(255, 230, 170, 0.2) 0%, transparent 70%),
+
+                /* ====== MORE BLEACH SPLATTERS ====== */
+                radial-gradient(circle 80px at 15% 45%, rgba(255, 255, 230, 0.2) 0%, transparent 70%),
+                radial-gradient(circle 60px at 65% 30%, rgba(255, 255, 220, 0.15) 0%, transparent 70%),
+                radial-gradient(circle 90px at 45% 70%, rgba(255, 255, 240, 0.15) 0%, transparent 70%),
+                radial-gradient(circle 50px at 85% 60%, rgba(255, 255, 230, 0.15) 0%, transparent 70%),
+                radial-gradient(circle 70px at 35% 90%, rgba(255, 255, 220, 0.12) 0%, transparent 70%),
+
+                /* ====== FILM GRAIN SPECKS ====== */
+                radial-gradient(circle 4px at 15% 25%, rgba(255, 200, 150, 0.7) 0%, transparent 100%),
+                radial-gradient(circle 5px at 75% 45%, rgba(255, 200, 150, 0.6) 0%, transparent 100%),
+                radial-gradient(circle 3px at 30% 70%, rgba(255, 200, 150, 0.7) 0%, transparent 100%),
+                radial-gradient(circle 6px at 60% 85%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 4px at 90% 15%, rgba(255, 200, 150, 0.65) 0%, transparent 100%),
+                radial-gradient(circle 5px at 50% 95%, rgba(255, 200, 150, 0.6) 0%, transparent 100%),
+                radial-gradient(circle 3px at 5% 50%, rgba(255, 200, 150, 0.6) 0%, transparent 100%),
+                radial-gradient(circle 5px at 95% 50%, rgba(255, 200, 150, 0.55) 0%, transparent 100%),
+                radial-gradient(circle 4px at 45% 30%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 5px at 70% 70%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 3px at 20% 90%, rgba(255, 200, 150, 0.55) 0%, transparent 100%),
+                radial-gradient(circle 4px at 40% 15%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 5px at 55% 55%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 3px at 80% 35%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 4px at 25% 45%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 5px at 65% 15%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 3px at 10% 70%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 4px at 85% 80%, rgba(255, 200, 150, 0.45) 0%, transparent 100%);
+            opacity: 0.85;
+            filter: blur(0.5px) contrast(1.15);
+            mix-blend-mode: screen;
+        }
+
+        /* Make sure content is above the sun spots */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Sun spots + bleach damage background (scrolls with page) -->
+        <div class="sun-spots"></div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1>Sun Spots + Bleach Damage</h1>
+
+            <p>This page has smaller, more focused sun spots with dramatic bleach damage — like old film stock that got hit with bleach. The spots and damage cover the entire page and scroll with it.</p>
+
+            <p>Look closely and you'll see:</p>
+            <ul style="color: #ccc; font-size: 18px; line-height: 2; margin-left: 30px; margin-bottom: 20px;">
+                <li><strong>☀️ Smaller sun spots</strong> — tighter, more focused warm orange/yellow light leaks</li>
+                <li><strong>🧪 Bleach drip marks</strong> — vertical streaks running down the page</li>
+                <li><strong>🔥 Chemical burn edges</strong> — damage along the borders</li>
+                <li><strong>💧 Bleach splatters</strong> — scattered drops of bleach</li>
+                <li><strong>🎞️ Film grain</strong> — tiny specks like old film stock</li>
+            </ul>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div style="height: 60px;"></div>
+
+            <p><strong>More content below...</strong></p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div style="height: 60px;"></div>
+
+            <p><strong>Even more content...</strong></p>
+
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <span class="scroll-hint">⬇ Scroll down ⬇</span>
+
+            <div style="height: 300px;"></div>
+
+            <p style="color: #666; text-align: center; font-size: 14px;">The sun spots and bleach damage cover the entire page!</p>
+        </div>
+    </div>
+</body>
+</html>

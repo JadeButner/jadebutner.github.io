@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productions | Jade Butner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ====== SIMPLIFIED SUN SPOTS + BLEACH DAMAGE ====== */
+        .sun-spots-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            min-height: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .sun-spots {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: 0%;
+            bottom: 0%;
+            background:
+                /* Warm spot - 1 */
+                radial-gradient(circle 400px at 25% 5%, rgba(255, 200, 80, 0.2) 0%, transparent 70%),
+
+                /* Blue spot - 1 */
+                radial-gradient(circle 550px at 95% 65%, rgba(80, 179, 255, 0.274) 0%, transparent 20%),
+
+                /* Purple spot - 1 */
+                radial-gradient(circle 320px at 50% 40%, rgba(164, 93, 231, 0.404) 0%, transparent 50%),
+
+                /* Pink spot - 1 */
+                radial-gradient(circle 300px at 10% 90%, rgba(255, 120, 181, 0.233) 0%, transparent 55%),
+
+                /* Bleach areas - 2 (keep these subtle) */
+                radial-gradient(ellipse 500px 300px at 30% 50%, rgba(255, 255, 220, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 350px at 70% 70%, rgba(255, 255, 210, 0.10) 0%, transparent 70%),
+
+                /* 10 GRAIN SPECKS */
+                radial-gradient(circle 4px at 15% 10%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 5px at 75% 45%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 3px at 36.5% 70%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 6px at 66.5% 85%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 4px at 95% 15%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 5px at 50% 92%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 3px at 5% 50%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 5px at 95% 59%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 4px at 36% 30%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 5px at 64% 43%, rgba(255, 200, 150, 0.35) 0%, transparent 100%);
+            opacity: 0.6;
+            filter: blur(0.3px) contrast(1.1);
+            mix-blend-mode: screen;
+        }
+
+        /* Ensure content sits above the sun spots */
+        .main-content,
+        header,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Fix: body should determine page height naturally */
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Make sure html and body don't have extra height issues */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Modal - Poster left, text right */
+        .modal-production {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .modal-poster {
+            flex: 0 0 45%;
+            max-width: 45%;
+            margin-bottom: 0;
+            background: #1a1a1a;
+        }
+
+        .modal-poster img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-poster .coming-soon-poster {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #555;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px dashed rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .modal-production {
+                flex-direction: column;
+            }
+            .modal-poster {
+                flex: 1;
+                max-width: 100%;
+            }
+            .modal-poster .coming-soon-poster {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sun spots background (scrolls with page) -->
+    <div class="sun-spots-wrapper">
+        <div class="sun-spots"></div>
+    </div>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo-link">
+                <h1>JADE <span>BUTNER</span></h1>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">About</a>
+            <a href="productions.html" class="active">Productions</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="productions-header">
+            <h2>My Productions</h2>
+            <p>Every project tells a story. Here's what I've been working on.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Short Film">Short Films</button>
+            <button class="filter-btn" data-filter="Documentary">Documentaries</button>
+            <button class="filter-btn" data-filter="Commercial">Commercials</button>
+            <button class="filter-btn" data-filter="Music Video">Music Videos</button>
+            <button class="filter-btn" data-filter="Corporate Interview">Interviews</button>
+        </div>
+
+        <div class="productions-grid" id="productionsGrid">
+            <!-- Productions will be rendered by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Production Modal -->
+    <div class="modal-overlay" id="productionModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
+            <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
+            <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+        </div>
+        <div class="footer-bts-wrapper">
+            <span class="bts-label">Behind The Scenes →</span>
+            <div class="footer-bts">
+                <a href="bts.html" class="trapdoor-link" id="trapdoorTrigger">
+                    <span class="trapdoor-closed">
+                        <svg class="trapdoor-icon-sm" viewBox="0 0 100 100">
+                            <rect x="2" y="2" width="96" height="96" rx="2" fill="#3d2817" stroke="#2a1a0e" stroke-width="2"/>
+                            <rect x="6" y="6" width="88" height="88" fill="#6b3f1f"/>
+                            <rect x="8" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="37" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="66" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <line x1="14" y1="12" x2="14" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="20" y1="12" x2="20" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="26" y1="12" x2="26" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="43" y1="12" x2="43" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="49" y1="12" x2="49" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="55" y1="12" x2="55" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="72" y1="12" x2="72" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="78" y1="12" x2="78" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="84" y1="12" x2="84" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <rect x="28" y="2" width="44" height="8" rx="1" fill="#8a8a8a" stroke="#6a6a6a" stroke-width="1"/>
+                            <rect x="26" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <rect x="64" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <circle cx="31" cy="6" r="2" fill="#555"/>
+                            <circle cx="69" cy="6" r="2" fill="#555"/>
+                        </svg>
+                    </span>
+                    <span class="trapdoor-open">
+                        <span class="trapdoor-open-text">BTS</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Production data - chronological (newest to oldest)
+        const productions = [
+            {
+                title: "Foothill Innovation Challenge Documentary",
+                type: "Documentary",
+                genre: null,
+                releaseDate: "TBD",
+                stage: "Post-Production",
+                roles: ["Director", "Producer", "Editor", "Colorist", "Sound Designer"],
+                logline: "A short documentary film pursuing the essence of a college challenge built to foster innovation.",
+                watchUrl: null,
+                poster: "images/Foothill-Poster.png",
+                thumbnail: "images/Foothill-Thumbnail.png"
+            },
+            {
+                title: "Meet the Founders",
+                type: "Corporate Interview",
+                genre: null,
+                releaseDate: "TBD",
+                stage: "Post-Production",
+                roles: ["Director", "Cinematographer", "Editor"],
+                logline: "An introduction to the founders of the indie video game company, Cosmic Bay Studios.",
+                watchUrl: "https://www.youtube.com/watch?v=Iq2Il2AX3Gk",
+                poster: "images/MeetTheFounders-Poster.png",
+                thumbnail: "images/MeetTheFounders-Thumbnail.png"
+            },
+            {
+                title: "Impavido",
+                type: "Music Video",
+                genre: null,
+                releaseDate: "June, 2026",
+                stage: null,
+                roles: ["Editor"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=6YN8ADAvQJQ",
+                poster: "images/Impavido-Square.png",
+                thumbnail: "images/Impavido-Thumbnail.png"
+            },
+            {
+                title: "Eraser Challenge",
+                type: "Commercial (Spec)",
+                genre: null,
+                releaseDate: "Mar, 2026",
+                stage: null,
+                roles: ["Director", "Producer", "Cinematographer", "Editor", "Sound Designer"],
+                logline: "A public service announcement bringing awareness to a dangerous social media game called 'Eraser Challenge.'",
+                watchUrl: "https://www.youtube.com/watch?v=2RKbEokwI3o",
+                poster: "images/Eraser-Square.png",
+                thumbnail: "images/Eraser-Thumbnail.png"
+            },
+            {
+                title: "Witness Me",
+                type: "Short Film",
+                genre: "Surrealist, Experimental, Dramatic",
+                releaseDate: "Feb 2026",
+                stage: null,
+                roles: ["Director", "Writer", "Producer", "Cinematographer", "Editor", "Colorist", "Sound Designer"],
+                logline: "Witness Me is a surrealist short film exhibiting the decision between political consciousness and unconsciousness.",
+                watchUrl: "https://www.youtube.com/watch?v=3oTU6rrO1CU",
+                poster: "images/Witness_Me-Poster.png",
+                thumbnail: "images/Witness_Me-Thumbnail.png"
+            },
+            {
+                title: "Stress",
+                type: "Short Film",
+                genre: "Experimental",
+                releaseDate: "Aug, 2025",
+                stage: null,
+                roles: ["Director", "Writer", "Producer", "Editor", "Colorist", "Sound Designer"],
+                logline: "Stress is an experimental short film about college applications from the point of view of a stress ball.",
+                watchUrl: "https://www.youtube.com/watch?v=-YOOBmlXZ7w",
+                poster: "images/Stress-Poster.png",
+                thumbnail: "images/Stress-Thumbnail.png"
+            },
+            {
+                title: "Cake",
+                type: "Short Film",
+                genre: "Dramatic, Psychological",
+                releaseDate: "June, 2025",
+                stage: null,
+                roles: ["Editor", "Colorist", "Sound Designer"],
+                logline: "After attending residential eating disorder treatment, a woman is forced to navigate a welcome back party grappling with inner demons.",
+                watchUrl: "https://www.youtube.com/watch?v=UcrWFSMoM6A",
+                poster: "images/Cake-Poster.png",
+                thumbnail: "images/Cake-Thumbnail.png"
+            },
+            {
+                title: "The Cave",
+                type: "Short Film",
+                genre: "Philosophical, Dramatic",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["First Assistant Director"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=MMTA2tulQTA",
+                poster: "images/The_Cave-Poster.jpg",
+                thumbnail: "images/The_Cave-Thumbnail.jpg"
+            },
+            {
+                title: "Watermelon",
+                type: "Short Film",
+                genre: "Comedy, Crime",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["Co-Producer", "Editor", "First Assistant Director"],
+                logline: "A twenty-two-year-old slacker is tasked with collecting a watermelon and gets wrapped up in a scheme consisting of hitmen, diamonds, and criminal organizations.",
+                watchUrl: "https://www.youtube.com/watch?v=S5H37zgoTw0",
+                poster: "images/Watermelon-Poster.jpg",
+                thumbnail: "images/Watermelon-Thumbnail.jpg"
+            },
+            {
+                title: "Forget Me Not",
+                type: "Short Film",
+                genre: "Experimental, Thriller",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["First Assistant Director"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=W2VUUltxdyo",
+                poster: "images/Forget_Me_Not-Poster.jpg",
+                thumbnail: "images/Forget_Me_Not-Thumbnail.jpg"
+            },
+            {
+                title: "Out The Door",
+                type: "Short Film",
+                genre: null,
+                releaseDate: "April 2025",
+                stage: null,
+                roles: ["Director", "Cinematographer", "Editor", "Colorist"],
+                logline: "Out The Door is a short film about a girl getting ready for school.",
+                watchUrl: "https://www.youtube.com/watch?v=4dsORdvTwq4",
+                poster: "images/Out_The_Door-Poster.jpeg",
+                thumbnail: "images/Out_The_Door-Thumbnail.jpg"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function getFilterFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const filter = params.get('filter');
+            if (filter) {
+                const validFilters = ['all', 'Short Film', 'Documentary', 'Commercial', 'Music Video', 'Corporate Interview'];
+                if (validFilters.includes(filter)) {
+                    return filter;
+                }
+                if (filter === 'Commercial') return 'Commercial';
+            }
+            return 'all';
+        }
+
+        function renderProductions(filter = 'all') {
+            const grid = document.getElementById('productionsGrid');
+            
+            const filtered = filter === 'all' 
+                ? productions 
+                : productions.filter(p => {
+                    if (filter === 'Commercial') {
+                        return p.type.includes('Commercial');
+                    }
+                    return p.type === filter;
+                });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="no-productions">No ${filter} productions found.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((p, index) => {
+                const realIndex = productions.indexOf(p);
+                const isTop = realIndex < 2;
+                const isSoft = realIndex >= 2 && realIndex < 4;
+                return `
+                    <div class="production-item ${isTop ? 'production-hard' : ''} ${isSoft ? 'production-soft' : ''}" data-index="${realIndex}">
+                        <div class="production-thumbnail" style="background-image: url('${p.thumbnail}'); background-size: cover; background-position: center;">
+                            <img loading="lazy" src="${p.thumbnail}" alt="${p.title}" style="display:none;" onerror="this.parentElement.style.backgroundImage='none'; this.parentElement.innerHTML='<div class=\\'coming-soon\\'>Coming Soon!</div>';">
+                            <div class="overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="production-info">
+                            <h3>${p.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.production-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    openModal(index);
+                });
+            });
+        }
+
+        function openModal(index) {
+            const p = productions[index];
+            const modal = document.getElementById('productionModal');
+            const body = document.getElementById('modalBody');
+            
+            // Check if poster exists
+            const posterHtml = p.poster ? 
+                `<img src="${p.poster}" alt="${p.title} Poster" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'coming-soon-poster\\'>Coming Soon!</div>';">` :
+                `<div class="coming-soon-poster">Coming Soon!</div>`;
+            
+            body.innerHTML = `
+                <div class="modal-production">
+                    <div class="modal-poster">
+                        ${posterHtml}
+                    </div>
+                    <div class="modal-info">
+                        <h2>${p.title}</h2>
+                        <div class="modal-type">${p.type} ${p.genre ? '· ' + p.genre : ''}</div>
+                        <div class="modal-meta">
+                            <span>${p.releaseDate}</span>
+                            ${p.stage ? `<span>${p.stage}</span>` : ''}
+                        </div>
+                        <div class="modal-roles">
+                            <strong>Roles:</strong> ${p.roles.join(' · ')}
+                        </div>
+                        ${p.logline ? `<div class="modal-logline"><strong>Logline:</strong> ${p.logline}</div>` : ''}
+                        ${p.watchUrl ? `<div class="modal-watch"><a href="${p.watchUrl}" target="_blank" class="btn-primary">Watch Now</a></div>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productionModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderProductions(currentFilter);
+                const url = new URL(window.location);
+                if (currentFilter === 'all') {
+                    url.searchParams.delete('filter');
+                } else {
+                    url.searchParams.set('filter', currentFilter);
+                }
+                window.history.pushState({}, '', url);
+            });
+        });
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('productionModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        const urlFilter = getFilterFromURL();
+        if (urlFilter !== 'all') {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === urlFilter) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        renderProductions(urlFilter);
+    </script>
+</body>
+</html>

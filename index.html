@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jade Butner | Filmmaker & Director</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Sun spots background - scrolls with page */
+        .sun-spots-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            min-height: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .sun-spots {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: 0%;
+            bottom: 0%;
+            background:
+                /* Warm spot - moved to bottom left */
+                radial-gradient(circle 450px at 15% 85%, rgba(255, 200, 80, 0.2) 0%, transparent 70%),
+
+                /* Blue spot - moved to top right */
+                radial-gradient(circle 500px at 85% 10%, rgba(80, 179, 255, 0.274) 0%, transparent 20%),
+
+                /* Purple spot - moved to center left */
+                radial-gradient(circle 380px at 20% 45%, rgba(164, 93, 231, 0.404) 0%, transparent 50%),
+
+                /* Pink spot - moved to bottom right */
+                radial-gradient(circle 350px at 80% 80%, rgba(255, 120, 181, 0.233) 0%, transparent 55%),
+
+                /* Bleach areas - 2 (keep these subtle) */
+                radial-gradient(ellipse 500px 300px at 30% 50%, rgba(255, 255, 220, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 350px at 70% 70%, rgba(255, 255, 210, 0.10) 0%, transparent 70%),
+
+                /* 10 GRAIN SPECKS - SAME POSITIONS */
+                radial-gradient(circle 4px at 15% 10%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 5px at 75% 45%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 3px at 36.5% 70%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
+                radial-gradient(circle 6px at 66.5% 85%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 4px at 95% 15%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 5px at 50% 92%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 3px at 5% 50%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
+                radial-gradient(circle 5px at 95% 59%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 4px at 36% 30%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 5px at 64% 43%, rgba(255, 200, 150, 0.35) 0%, transparent 100%);
+            opacity: 0.6;
+            filter: blur(0.3px) contrast(1.1);
+            mix-blend-mode: screen;
+        }
+
+        /* Ensure content sits above the sun spots */
+        .main-content,
+        header,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            background: #1E1F22;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sun spots background -->
+    <div class="sun-spots-wrapper">
+        <div class="sun-spots"></div>
+    </div>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo-link">
+                <h1>JADE <span>BUTNER</span></h1>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html" class="active">About</a>
+            <a href="productions.html">Productions</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="hero">
+            <h2>Storyteller. Visionary. Director.</h2>
+            <p class="tagline">Bringing compelling narratives to life through the lens of cinema.</p>
+            <div class="bio-short">
+                Every frame tells a story. From indie shorts to feature films, 
+                I craft visual experiences that move, inspire, and provoke thought.
+            </div>
+        </section>
+
+        <!-- Profile Image + Description (side by side) -->
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="images/JadeButner.jpg" alt="Jade Butner — Filmmaker & Director">
+            </div>
+            <div class="about-content">
+                <h2>Jade Butner</h2>
+                <div class="subtitle">Filmmaker · Director</div>
+                <div class="story">
+                    <p>Jade Butner is a filmmaker based in Los Angeles specializing in directing & editing both narrative & documentaries.</p>
+                    <p>They achieved their associates for Film, Television & Electronic Media while producing two short films for the Foothill Film Club as well as directing several personal films. Now Jade is heading to CSU Northridge to further develop their skills in every aspect of film.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- "Looking for collaboration..." - FULL WIDTH -->
+        <div class="about-summary-full">
+            <div class="summary">
+                Looking for collaboration. I believe in the power of story to inspire change.
+            </div>
+        </div>
+
+        <!-- Skills - LEFT ALIGNED, NO BOX -->
+        <div class="about-skills-full">
+            <h4>Technical Skills</h4>
+            <div class="skills-list-full">
+                <span class="skill-tag">DaVinci Resolve</span>
+                <span class="skill-tag">Premiere Pro</span>
+                <span class="skill-tag">Pro Tools</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">Autodesk Maya</span>
+                <span class="skill-tag">Camera Operation</span>
+                <span class="skill-tag">Video Editing</span>
+                <span class="skill-tag">Color Correction</span>
+                <span class="skill-tag">Color Grading</span>
+                <span class="skill-tag">Sound Designing</span>
+                <span class="skill-tag">Production Sound</span>
+                <span class="skill-tag">Screenwriting</span>
+                <span class="skill-tag">Collaborative Teamwork</span>
+                <span class="skill-tag">Project Management</span>
+                <span class="skill-tag">Clear Communication</span>
+            </div>
+        </div>
+
+        <!-- Buttons - FULL WIDTH -->
+        <div class="about-actions">
+            <a href="productions.html" class="btn-primary">View My Work</a>
+            <a href="Butner_Jade-Creative_Portfolio.pdf" target="_blank" class="btn-secondary">Artistic Portfolio (PDF)</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
+            <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
+            <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+        </div>
+        <div class="footer-bts-wrapper">
+            <span class="bts-label">Behind The Scenes →</span>
+            <div class="footer-bts">
+                <a href="bts.html" class="trapdoor-link" id="trapdoorTrigger">
+                    <span class="trapdoor-closed">
+                        <svg class="trapdoor-icon-sm" viewBox="0 0 100 100">
+                            <rect x="2" y="2" width="96" height="96" rx="2" fill="#3d2817" stroke="#2a1a0e" stroke-width="2"/>
+                            <rect x="6" y="6" width="88" height="88" fill="#6b3f1f"/>
+                            <rect x="8" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="37" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="66" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <line x1="14" y1="12" x2="14" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="20" y1="12" x2="20" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="26" y1="12" x2="26" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="43" y1="12" x2="43" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="49" y1="12" x2="49" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="55" y1="12" x2="55" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="72" y1="12" x2="72" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="78" y1="12" x2="78" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="84" y1="12" x2="84" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <rect x="28" y="2" width="44" height="8" rx="1" fill="#8a8a8a" stroke="#6a6a6a" stroke-width="1"/>
+                            <rect x="26" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <rect x="64" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <circle cx="31" cy="6" r="2" fill="#555"/>
+                            <circle cx="69" cy="6" r="2" fill="#555"/>
+                        </svg>
+                    </span>
+                    <span class="trapdoor-open">
+                        <span class="trapdoor-open-text">BTS</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
