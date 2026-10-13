@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Jade Butner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Sun spots background - scrolls with page */
+        .sun-spots-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            min-height: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .sun-spots {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: 0%;
+            bottom: 0%;
+            background:
+                radial-gradient(circle 400px at 70% 15%, rgba(255, 200, 80, 0.18) 0%, transparent 70%),
+                radial-gradient(circle 500px at 15% 70%, rgba(80, 179, 255, 0.22) 0%, transparent 30%),
+                radial-gradient(circle 360px at 80% 80%, rgba(164, 93, 231, 0.32) 0%, transparent 50%),
+                radial-gradient(circle 320px at 25% 25%, rgba(255, 120, 181, 0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 500px 300px at 30% 50%, rgba(255, 255, 220, 0.10) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 350px at 70% 70%, rgba(255, 255, 210, 0.08) 0%, transparent 70%),
+                radial-gradient(circle 4px at 15% 10%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 5px at 75% 45%, rgba(255, 200, 150, 0.35) 0%, transparent 100%),
+                radial-gradient(circle 3px at 36.5% 70%, rgba(255, 200, 150, 0.45) 0%, transparent 100%),
+                radial-gradient(circle 6px at 66.5% 85%, rgba(255, 200, 150, 0.3) 0%, transparent 100%),
+                radial-gradient(circle 4px at 95% 15%, rgba(255, 200, 150, 0.4) 0%, transparent 100%);
+            opacity: 0.6;
+            filter: blur(0.3px) contrast(1.1);
+            mix-blend-mode: screen;
+        }
+
+        .main-content,
+        header,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ====== PHOTOGRAPHY PAGE ====== */
+        .photos-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .photos-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .photos-header p {
+            color: #999;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        /* Control bars */
+        .photo-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 40px;
+        }
+
+        .control-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 16px 20px;
+            background: #2b2d31;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .control-bar + .control-bar {
+            border-top: none;
+        }
+
+        .control-btn {
+            background: transparent;
+            color: #888;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn:hover:not(:disabled) {
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .control-btn.active {
+            color: #fff;
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
+        .control-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .control-btn .btn-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .control-label {
+            color: #666;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        /* Photo grid - medium default (3 columns) */
+        .photo-grid {
+            display: grid;
+            gap: 12px;
+            margin: 0 auto;
+        }
+
+        .photo-grid.size-medium {
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 1100px;
+        }
+
+        .photo-grid.size-large {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 1000px;
+        }
+
+        .photo-grid.size-xlarge {
+            grid-template-columns: 1fr;
+            max-width: 100%;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #2b2d31;
+            border: 1px solid rgba(255,255,255,0.05);
+            aspect-ratio: 1/1;
+        }
+
+        .photo-grid.size-large .photo-item {
+            aspect-ratio: 4/3;
+        }
+
+        .photo-grid.size-xlarge .photo-item {
+            aspect-ratio: 16/9;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Coming soon state */
+        .coming-soon-state {
+            text-align: center;
+            padding: 100px 40px;
+            color: #666;
+        }
+
+        .coming-soon-state .cs-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 24px;
+            opacity: 0.4;
+        }
+
+        .coming-soon-state h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .coming-soon-state p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            font-size: 40px;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: #fff;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #aaa;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .photos-header h2 {
+                font-size: 30px;
+            }
+
+            .photo-grid.size-medium {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .control-bar {
+                padding: 12px 10px;
+                gap: 6px;
+            }
+
+            .control-btn {
+                padding: 7px 14px;
+                font-size: 12px;
+            }
+
+            .control-label {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 4px;
+            }
+
+            .lightbox {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo-grid.size-medium {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sun spots background -->
+    <div class="sun-spots-wrapper">
+        <div class="sun-spots"></div>
+    </div>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="header-left">
+            <a href="index.html" class="logo-link">
+                <h1>JADE <span>BUTNER</span></h1>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="photos.html" class="active">Photography</a>
+            <a href="contact.html">Contact Me</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="photos-header">
+            <h2>Photography</h2>
+            <p>Just a hobby :D</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="photo-controls">
+            <!-- Size filter (Finder-style) -->
+            <div class="control-bar" id="sizeBar">
+                <span class="control-label">View:</span>
+                <button class="control-btn active" data-size="medium">
+                    Medium
+                </button>
+                <button class="control-btn" data-size="large">
+                    Large
+                </button>
+                <button class="control-btn" data-size="xlarge">
+                    Extra Large
+                </button>
+            </div>
+
+            <!-- Film vs Digital toggle -->
+            <div class="control-bar" id="mediumBar">
+                <span class="control-label">Format:</span>
+                <button class="control-btn active" data-medium="digital">Digital</button>
+                <button class="control-btn" data-medium="film" disabled title="Coming soon">Film (Coming Soon)</button>
+            </div>
+        </div>
+
+        <!-- Photo grid -->
+        <div class="photo-grid size-medium" id="photoGrid"></div>
+
+        <!-- Coming soon state (hidden by default) -->
+        <div class="coming-soon-state" id="comingSoonState" style="display:none;">
+            <svg class="cs-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <h3>Film Photography Coming Soon</h3>
+            <p>Still shooting, still developing. Check back later.</p>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
+            <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
+            <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+        </div>
+        <div class="footer-bts-wrapper">
+            <span class="bts-label">Behind The Scenes →</span>
+            <div class="footer-bts">
+                <a href="bts.html" class="trapdoor-link" id="trapdoorTrigger">
+                    <span class="trapdoor-closed">
+                        <svg class="trapdoor-icon-sm" viewBox="0 0 100 100">
+                            <rect x="2" y="2" width="96" height="96" rx="2" fill="#3d2817" stroke="#2a1a0e" stroke-width="2"/>
+                            <rect x="6" y="6" width="88" height="88" fill="#6b3f1f"/>
+                            <rect x="8" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="37" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <rect x="66" y="8" width="26" height="84" fill="#7a4a28" stroke="#5a3520" stroke-width="1"/>
+                            <line x1="14" y1="12" x2="14" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="20" y1="12" x2="20" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="26" y1="12" x2="26" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="43" y1="12" x2="43" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="49" y1="12" x2="49" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="55" y1="12" x2="55" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="72" y1="12" x2="72" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="78" y1="12" x2="78" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <line x1="84" y1="12" x2="84" y2="88" stroke="#6b3f1f" stroke-width="1" opacity="0.4"/>
+                            <rect x="28" y="2" width="44" height="8" rx="1" fill="#8a8a8a" stroke="#6a6a6a" stroke-width="1"/>
+                            <rect x="26" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <rect x="64" y="4" width="10" height="8" rx="1" fill="#9a9a9a" stroke="#6a6a6a" stroke-width="0.5"/>
+                            <circle cx="31" cy="6" r="2" fill="#555"/>
+                            <circle cx="69" cy="6" r="2" fill="#555"/>
+                        </svg>
+                    </span>
+                    <span class="trapdoor-open">
+                        <span class="trapdoor-open-text">BTS</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // All digital photos in the "Photography" folder
+        const digitalPhotos = [
+            "Photography/1.18.26-1.jpg",
+            "Photography/1.18.26-2.jpg",
+            "Photography/1.18.26-3.jpg",
+            "Photography/1.19.26-1.jpg",
+            "Photography/1.19.26-2.jpg",
+            "Photography/1.19.26-3.jpg",
+            "Photography/1.19.26-4.jpg",
+            "Photography/1.19.26-5.jpg",
+            "Photography/1.19.26-6.jpg",
+            "Photography/1.19.26-7.jpg",
+            "Photography/2.5.26-1.jpg",
+            "Photography/4.18.26-1.jpg",
+            "Photography/4.19.26-1.jpg",
+            "Photography/4.19.26-2.jpg",
+            "Photography/4.19.26-3.jpg",
+            "Photography/6.12.26-1.jpg",
+            "Photography/AMG.26-1.jpg",
+            "Photography/AMG.26-2.jpg",
+            "Photography/AMG.26-3.jpg",
+            "Photography/AMG.26-4.jpg",
+            "Photography/AMG.26-5.jpg",
+            "Photography/AMG.26-6.jpg",
+            "Photography/AMG.26-7.jpg",
+            "Photography/AMG.26-8.jpg",
+            "Photography/AMG.26-9.jpg",
+            "Photography/AMG.26-10.jpg",
+            "Photography/AMG.26-11.jpg",
+            "Photography/AMG.26-13.jpg",
+            "Photography/AMG.26-14.jpg",
+            "Photography/AMG.26-15.jpg",
+            "Photography/AMG.26-16.jpg",
+            "Photography/AMG.26-17.jpg",
+            "Photography/BP.26-1.jpg",
+            "Photography/BP.26-2.jpg",
+            "Photography/BP.26-3.jpg",
+            "Photography/BP.26-4.jpg",
+            "Photography/FFC.26-1.jpg",
+            "Photography/FFC.26-2.jpg",
+            "Photography/FFC.26-3.jpg",
+            "Photography/FFC.26-4.jpg"
+        ];
+
+        let currentSize = 'medium';
+        let currentMedium = 'digital';
+
+        function renderPhotos() {
+            const grid = document.getElementById('photoGrid');
+            const comingSoon = document.getElementById('comingSoonState');
+
+            // Film = coming soon
+            if (currentMedium === 'film') {
+                grid.style.display = 'none';
+                comingSoon.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            comingSoon.style.display = 'none';
+
+            grid.className = 'photo-grid size-' + currentSize;
+
+            if (digitalPhotos.length === 0) {
+                grid.innerHTML = '<div class="no-productions" style="grid-column:1/-1;">No photos yet.</div>';
+                return;
+            }
+
+            grid.innerHTML = digitalPhotos.map((src, i) => {
+                return `
+                    <div class="photo-item" data-index="${i}">
+                        <img loading="lazy" src="${src}" alt="Photograph ${i + 1}" 
+                             onerror="this.parentElement.style.display='none';">
+                    </div>
+                `;
+            }).join('');
+
+            // Rebind click events
+            document.querySelectorAll('.photo-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    openLightbox(digitalPhotos[idx]);
+                });
+            });
+        }
+
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = '';
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Size buttons
+        document.querySelectorAll('#sizeBar .control-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#sizeBar .control-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentSize = this.dataset.size;
+                renderPhotos();
+            });
+        });
+
+        // Medium (film/digital) buttons
+        document.querySelectorAll('#mediumBar .control-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.disabled) return;
+                document.querySelectorAll('#mediumBar .control-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentMedium = this.dataset.medium;
+                renderPhotos();
+            });
+        });
+
+        // Lightbox close
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Initial render
+        renderPhotos();
+    </script>
+</body>
+</html>

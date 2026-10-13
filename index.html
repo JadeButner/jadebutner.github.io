@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jade Butner | Filmmaker & Director</title>
+    <title>Work | Jade Butner</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Sun spots background - scrolls with page */
+        /* ====== SIMPLIFIED SUN SPOTS + BLEACH DAMAGE ====== */
         .sun-spots-wrapper {
             position: absolute;
             top: 0;
@@ -27,23 +27,23 @@
             right: 0%;
             bottom: 0%;
             background:
-                /* Warm spot - moved to bottom left */
-                radial-gradient(circle 450px at 15% 85%, rgba(255, 200, 80, 0.2) 0%, transparent 70%),
+                /* Warm spot - 1 */
+                radial-gradient(circle 400px at 25% 5%, rgba(255, 200, 80, 0.2) 0%, transparent 70%),
 
-                /* Blue spot - moved to top right */
-                radial-gradient(circle 500px at 85% 10%, rgba(80, 179, 255, 0.274) 0%, transparent 20%),
+                /* Blue spot - 1 */
+                radial-gradient(circle 550px at 95% 65%, rgba(80, 179, 255, 0.274) 0%, transparent 20%),
 
-                /* Purple spot - moved to center left */
-                radial-gradient(circle 380px at 20% 45%, rgba(164, 93, 231, 0.404) 0%, transparent 50%),
+                /* Purple spot - 1 */
+                radial-gradient(circle 320px at 50% 40%, rgba(164, 93, 231, 0.404) 0%, transparent 50%),
 
-                /* Pink spot - moved to bottom right */
-                radial-gradient(circle 350px at 80% 80%, rgba(255, 120, 181, 0.233) 0%, transparent 55%),
+                /* Pink spot - 1 */
+                radial-gradient(circle 300px at 10% 90%, rgba(255, 120, 181, 0.233) 0%, transparent 55%),
 
                 /* Bleach areas - 2 (keep these subtle) */
                 radial-gradient(ellipse 500px 300px at 30% 50%, rgba(255, 255, 220, 0.12) 0%, transparent 70%),
                 radial-gradient(ellipse 600px 350px at 70% 70%, rgba(255, 255, 210, 0.10) 0%, transparent 70%),
 
-                /* 10 GRAIN SPECKS - SAME POSITIONS */
+                /* 10 GRAIN SPECKS */
                 radial-gradient(circle 4px at 15% 10%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
                 radial-gradient(circle 5px at 75% 45%, rgba(255, 200, 150, 0.4) 0%, transparent 100%),
                 radial-gradient(circle 3px at 36.5% 70%, rgba(255, 200, 150, 0.5) 0%, transparent 100%),
@@ -67,21 +67,142 @@
             z-index: 1;
         }
 
+        /* Fix: body should determine page height naturally */
         body {
             position: relative;
             min-height: 100vh;
-            background: #1E1F22;
         }
 
+        /* Make sure html and body don't have extra height issues */
         html, body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+        }
+
+        /* Modal - Poster left, text right */
+        .modal-production {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .modal-poster {
+            flex: 0 0 45%;
+            max-width: 45%;
+            margin-bottom: 0;
+            background: #1a1a1a;
+        }
+
+        .modal-poster img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .modal-poster .coming-soon-poster {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #555;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px dashed rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .modal-production {
+                flex-direction: column;
+            }
+            .modal-poster {
+                flex: 1;
+                max-width: 100%;
+            }
+            .modal-poster .coming-soon-poster {
+                height: 250px;
+            }
+        }
+
+        /* Second layer of filters */
+        .role-filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 5px;
+            padding: 16px 5px;
+            background: #2b2d31;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: none;
+        }
+
+        .role-filter-btn {
+            background: transparent;
+            color: #888;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .role-filter-btn:hover {
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .role-filter-btn.active {
+            color: #fff;
+            background: #c0392b;
+            border-color: #c0392b;
+        }
+
+        .no-productions {
+            text-align: center;
+            color: #888;
+            padding: 60px 20px;
+            font-size: 18px;
+            grid-column: 1 / -1;
+        }
+
+        /* Fix thumbnail image display */
+        .production-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .production-thumbnail .coming-soon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #2b2d31;
+            color: #666;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
-    <!-- Sun spots background -->
+    <!-- Sun spots background (scrolls with page) -->
     <div class="sun-spots-wrapper">
         <div class="sun-spots"></div>
     </div>
@@ -94,72 +215,53 @@
             </a>
         </div>
         <nav>
-            <a href="index.html" class="active">About</a>
-            <a href="productions.html">Productions</a>
+            <a href="index.html" class="active">Work</a>
+            <a href="about.html">About</a>
+            <a href="photos.html">Photography</a>
+            <a href="contact.html">Contact Me</a>
         </nav>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <section class="hero">
-            <h2>Storyteller. Visionary. Director.</h2>
-            <p class="tagline">Bringing compelling narratives to life through the lens of cinema.</p>
-            <div class="bio-short">
-                Every frame tells a story. From indie shorts to feature films, 
-                I craft visual experiences that move, inspire, and provoke thought.
-            </div>
-        </section>
-
-        <!-- Profile Image + Description (side by side) -->
-        <div class="about-grid">
-            <div class="about-image">
-                <img src="images/JadeButner.jpg" alt="Jade Butner — Filmmaker & Director">
-            </div>
-            <div class="about-content">
-                <h2>Jade Butner</h2>
-                <div class="subtitle">Filmmaker · Director</div>
-                <div class="story">
-                    <p>Jade Butner is a filmmaker based in Los Angeles specializing in directing & editing both narrative & documentaries.</p>
-                    <p>They achieved their associates for Film, Television & Electronic Media while producing two short films for the Foothill Film Club as well as directing several personal films. Now Jade is heading to CSU Northridge to further develop their skills in every aspect of film.</p>
-                </div>
-            </div>
+        <div class="productions-header">
+            <h2>My Work</h2>
+            <p>Every project tells a story. Here's what I've been working on.</p>
         </div>
 
-        <!-- "Looking for collaboration..." - FULL WIDTH -->
-        <div class="about-summary-full">
-            <div class="summary">
-                Looking for collaboration. I believe in the power of story to inspire change.
-            </div>
+        <!-- Type Filter Bar -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Short Film">Short Films</button>
+            <button class="filter-btn" data-filter="Documentary">Documentaries</button>
+            <button class="filter-btn" data-filter="Commercial">Commercials</button>
+            <button class="filter-btn" data-filter="Music Video">Music Videos</button>
+            <button class="filter-btn" data-filter="Corporate Interview">Interviews</button>
         </div>
 
-        <!-- Skills - LEFT ALIGNED, NO BOX -->
-        <div class="about-skills-full">
-            <h4>Technical Skills</h4>
-            <div class="skills-list-full">
-                <span class="skill-tag">DaVinci Resolve</span>
-                <span class="skill-tag">Premiere Pro</span>
-                <span class="skill-tag">Pro Tools</span>
-                <span class="skill-tag">Photoshop</span>
-                <span class="skill-tag">Autodesk Maya</span>
-                <span class="skill-tag">Camera Operation</span>
-                <span class="skill-tag">Video Editing</span>
-                <span class="skill-tag">Color Correction</span>
-                <span class="skill-tag">Color Grading</span>
-                <span class="skill-tag">Sound Designing</span>
-                <span class="skill-tag">Production Sound</span>
-                <span class="skill-tag">Screenwriting</span>
-                <span class="skill-tag">Collaborative Teamwork</span>
-                <span class="skill-tag">Project Management</span>
-                <span class="skill-tag">Clear Communication</span>
-            </div>
+        <!-- Role Filter Bar -->
+        <div class="role-filter-bar" id="roleFilterBar">
+            <button class="role-filter-btn active" data-role="all">All Roles</button>
+            <button class="role-filter-btn" data-role="director">Director</button>
+            <button class="role-filter-btn" data-role="editor">Editor</button>
+            <button class="role-filter-btn" data-role="cinematographer">Cinematographer</button>
+            <button class="role-filter-btn" data-role="writer">Writer</button>
+            <button class="role-filter-btn" data-role="production">Production</button>
+            <button class="role-filter-btn" data-role="audio">Audio</button>
         </div>
 
-        <!-- Buttons - FULL WIDTH -->
-        <div class="about-actions">
-            <a href="productions.html" class="btn-primary">View My Work</a>
-            <a href="Butner_Jade-Creative_Portfolio.pdf" target="_blank" class="btn-secondary">Artistic Portfolio (PDF)</a>
+        <div class="productions-grid" id="productionsGrid">
+            <!-- Productions will be rendered by JavaScript -->
         </div>
     </main>
+
+    <!-- Production Modal -->
+    <div class="modal-overlay" id="productionModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-social">
@@ -201,5 +303,347 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Production data - chronological (newest to oldest)
+        const productions = [
+            {
+                title: "Foothill Innovation Challenge Documentary",
+                type: "Documentary",
+                genre: null,
+                releaseDate: "TBD",
+                stage: "Post-Production",
+                roles: ["Director", "Producer", "Editor", "Colorist", "Sound Designer"],
+                logline: "A short documentary film pursuing the essence of a college challenge built to foster innovation.",
+                watchUrl: null,
+                poster: "images/Foothill-Poster.png",
+                thumbnail: "images/Foothill-Thumbnail.png"
+            },
+            {
+                title: "Impavido",
+                type: "Music Video",
+                genre: null,
+                releaseDate: "June, 2026",
+                stage: null,
+                roles: ["Editor"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=6YN8ADAvQJQ",
+                poster: "images/Impavido-Square.png",
+                thumbnail: "images/Impavido-Thumbnail.png"
+            },
+            {
+                title: "Eraser Challenge",
+                type: "Commercial (Spec)",
+                genre: null,
+                releaseDate: "Mar, 2026",
+                stage: null,
+                roles: ["Director", "Producer", "Cinematographer", "Editor", "Sound Designer"],
+                logline: "A public service announcement bringing awareness to a dangerous social media game called 'Eraser Challenge.'",
+                watchUrl: "https://www.youtube.com/watch?v=2RKbEokwI3o",
+                poster: "images/Eraser-Square.png",
+                thumbnail: "images/Eraser-Thumbnail.png"
+            },
+            {
+                title: "Witness Me",
+                type: "Short Film",
+                genre: "Surrealist, Experimental, Dramatic",
+                releaseDate: "Feb 2026",
+                stage: null,
+                roles: ["Director", "Writer", "Producer", "Cinematographer", "Editor", "Colorist", "Sound Designer"],
+                logline: "Witness Me is a surrealist short film exhibiting the decision between political consciousness and unconsciousness.",
+                watchUrl: "https://www.youtube.com/watch?v=3oTU6rrO1CU",
+                poster: "images/Witness_Me-Poster.png",
+                thumbnail: "images/Witness_Me-Thumbnail.png"
+            },
+            {
+                title: "Stress",
+                type: "Short Film",
+                genre: "Experimental",
+                releaseDate: "Aug, 2025",
+                stage: null,
+                roles: ["Director", "Writer", "Producer", "Editor", "Colorist", "Sound Designer"],
+                logline: "Stress is an experimental short film about college applications from the point of view of a stress ball.",
+                watchUrl: "https://www.youtube.com/watch?v=-YOOBmlXZ7w",
+                poster: "images/Stress-Poster.png",
+                thumbnail: "images/Stress-Thumbnail.png"
+            },
+            {
+                title: "Cake",
+                type: "Short Film",
+                genre: "Dramatic, Psychological",
+                releaseDate: "June, 2025",
+                stage: null,
+                roles: ["Editor", "Colorist", "Sound Designer"],
+                logline: "After attending residential eating disorder treatment, a woman is forced to navigate a welcome back party grappling with inner demons.",
+                watchUrl: "https://www.youtube.com/watch?v=UcrWFSMoM6A",
+                poster: "images/Cake-Poster.png",
+                thumbnail: "images/Cake-Thumbnail.png"
+            },
+            {
+                title: "The Cave",
+                type: "Short Film",
+                genre: "Philosophical, Dramatic",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["First Assistant Director"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=MMTA2tulQTA",
+                poster: "images/The_Cave-Poster.jpg",
+                thumbnail: "images/The_Cave-Thumbnail.jpg"
+            },
+            {
+                title: "Watermelon",
+                type: "Short Film",
+                genre: "Comedy, Crime",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["Co-Producer", "Editor", "First Assistant Director"],
+                logline: "A twenty-two-year-old slacker is tasked with collecting a watermelon and gets wrapped up in a scheme consisting of hitmen, diamonds, and criminal organizations.",
+                watchUrl: "https://www.youtube.com/watch?v=S5H37zgoTw0",
+                poster: "images/Watermelon-Poster.jpg",
+                thumbnail: "images/Watermelon-Thumbnail.jpg"
+            },
+            {
+                title: "Forget Me Not",
+                type: "Short Film",
+                genre: "Experimental, Thriller",
+                releaseDate: "June 2025",
+                stage: null,
+                roles: ["First Assistant Director"],
+                logline: null,
+                watchUrl: "https://www.youtube.com/watch?v=W2VUUltxdyo",
+                poster: "images/Forget_Me_Not-Poster.jpg",
+                thumbnail: "images/Forget_Me_Not-Thumbnail.jpg"
+            },
+            {
+                title: "Out The Door",
+                type: "Short Film",
+                genre: null,
+                releaseDate: "April 2025",
+                stage: null,
+                roles: ["Director", "Cinematographer", "Editor", "Colorist"],
+                logline: "Out The Door is a short film about a girl getting ready for school.",
+                watchUrl: "https://www.youtube.com/watch?v=4dsORdvTwq4",
+                poster: "images/Out_The_Door-Poster.jpeg",
+                thumbnail: "images/Out_The_Door-Thumbnail.jpg"
+            }
+        ];
+
+        let currentTypeFilter = 'all';
+        let currentRoleFilter = 'all';
+
+        // Role mapping: maps filter category to matching role keywords
+        const roleMapping = {
+            'director': ['Director'],
+            'editor': ['Editor'],
+            'cinematographer': ['Cinematographer'],
+            'writer': ['Writer'],
+            'production': ['Producer', 'Co-Producer', 'First Assistant Director'],
+            'audio': ['Sound Designer', 'Production Sound', 'Sound']
+        };
+
+        function getFilterFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const filter = params.get('filter');
+            if (filter) {
+                const validFilters = ['all', 'Short Film', 'Documentary', 'Commercial', 'Music Video', 'Corporate Interview'];
+                if (validFilters.includes(filter)) {
+                    return filter;
+                }
+                if (filter === 'Commercial') return 'Commercial';
+            }
+            return 'all';
+        }
+
+        function getRoleFilterFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const role = params.get('role');
+            if (role) {
+                const validRoles = ['all', 'director', 'editor', 'cinematographer', 'writer', 'production', 'audio'];
+                if (validRoles.includes(role)) {
+                    return role;
+                }
+            }
+            return 'all';
+        }
+
+        function matchesRoleFilter(production, roleFilter) {
+            if (roleFilter === 'all') return true;
+            const keywords = roleMapping[roleFilter];
+            if (!keywords) return true;
+            return production.roles.some(role => 
+                keywords.some(keyword => role.toLowerCase().includes(keyword.toLowerCase()))
+            );
+        }
+
+        function renderProductions(typeFilter = 'all', roleFilter = 'all') {
+            const grid = document.getElementById('productionsGrid');
+            
+            let filtered = productions;
+
+            // Apply type filter
+            if (typeFilter !== 'all') {
+                filtered = filtered.filter(p => {
+                    if (typeFilter === 'Commercial') {
+                        return p.type.includes('Commercial');
+                    }
+                    return p.type === typeFilter;
+                });
+            }
+
+            // Apply role filter
+            filtered = filtered.filter(p => matchesRoleFilter(p, roleFilter));
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="no-productions">No projects here yet. Check back when I have done more.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((p) => {
+                const realIndex = productions.indexOf(p);
+                const isTop = realIndex < 2;
+                const isSoft = realIndex >= 2 && realIndex < 4;
+                
+                // Determine if thumbnail exists - use onerror to handle missing images
+                const thumbnailHtml = `
+                    <img loading="lazy" src="${p.thumbnail}" alt="${p.title}" 
+                         onerror="this.style.display='none'; this.parentElement.querySelector('.coming-soon').style.display='flex';">
+                    <div class="coming-soon" style="display:none;">Coming Soon!</div>
+                `;
+
+                return `
+                    <div class="production-item ${isTop ? 'production-hard' : ''} ${isSoft ? 'production-soft' : ''}" data-index="${realIndex}">
+                        <div class="production-thumbnail">
+                            ${thumbnailHtml}
+                            <div class="overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="production-info">
+                            <h3>${p.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.production-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    openModal(index);
+                });
+            });
+        }
+
+        function openModal(index) {
+            const p = productions[index];
+            const modal = document.getElementById('productionModal');
+            const body = document.getElementById('modalBody');
+            
+            // Check if poster exists - if image fails to load, show "Coming Soon!"
+            const posterHtml = p.poster ? 
+                `<img src="${p.poster}" alt="${p.title} Poster" onerror="this.style.display='none'; this.parentElement.querySelector('.coming-soon-poster').style.display='flex';">
+                 <div class="coming-soon-poster" style="display:none;">Coming Soon!</div>` :
+                `<div class="coming-soon-poster" style="display:flex;">Coming Soon!</div>`;
+            
+            body.innerHTML = `
+                <div class="modal-production">
+                    <div class="modal-poster">
+                        ${posterHtml}
+                    </div>
+                    <div class="modal-info">
+                        <h2>${p.title}</h2>
+                        <div class="modal-type">${p.type} ${p.genre ? '· ' + p.genre : ''}</div>
+                        <div class="modal-meta">
+                            <span>${p.releaseDate}</span>
+                            ${p.stage ? `<span>${p.stage}</span>` : ''}
+                        </div>
+                        <div class="modal-roles">
+                            <strong>My Role:</strong> ${p.roles.join(' · ')}
+                        </div>
+                        ${p.logline ? `<div class="modal-logline"><strong>Logline:</strong> ${p.logline}</div>` : ''}
+                        ${p.watchUrl ? `<div class="modal-watch"><a href="${p.watchUrl}" target="_blank" class="btn-primary">Watch Now</a></div>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productionModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Type filter buttons
+        document.querySelectorAll('#filterBar .filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#filterBar .filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentTypeFilter = this.dataset.filter;
+                renderProductions(currentTypeFilter, currentRoleFilter);
+                updateURL();
+            });
+        });
+
+        // Role filter buttons
+        document.querySelectorAll('#roleFilterBar .role-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#roleFilterBar .role-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentRoleFilter = this.dataset.role;
+                renderProductions(currentTypeFilter, currentRoleFilter);
+                updateURL();
+            });
+        });
+
+        function updateURL() {
+            const url = new URL(window.location);
+            if (currentTypeFilter === 'all') {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', currentTypeFilter);
+            }
+            if (currentRoleFilter === 'all') {
+                url.searchParams.delete('role');
+            } else {
+                url.searchParams.set('role', currentRoleFilter);
+            }
+            window.history.pushState({}, '', url);
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('productionModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize from URL params
+        const urlTypeFilter = getFilterFromURL();
+        const urlRoleFilter = getRoleFilterFromURL();
+
+        if (urlTypeFilter !== 'all') {
+            document.querySelectorAll('#filterBar .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === urlTypeFilter) {
+                    btn.classList.add('active');
+                }
+            });
+            currentTypeFilter = urlTypeFilter;
+        }
+
+        if (urlRoleFilter !== 'all') {
+            document.querySelectorAll('#roleFilterBar .role-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.role === urlRoleFilter) {
+                    btn.classList.add('active');
+                }
+            });
+            currentRoleFilter = urlRoleFilter;
+        }
+
+        renderProductions(currentTypeFilter, currentRoleFilter);
+    </script>
 </body>
 </html>
