@@ -375,7 +375,6 @@
                 <input type="hidden" name="_subject" value="New message from JadeButner.com contact form">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://jadebutner.com/contact.html?sent=true">
 
                 <div class="form-row">
                     <div class="form-group">
@@ -416,6 +415,7 @@
             <div class="contact-social">
                 <a href="https://www.instagram.com/jaded.butter/" target="_blank">Instagram</a>
                 <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank">LinkedIn</a>
+                <a href="https://letterboxd.com/jadedbutter/" target="_blank">Letterboxd</a>
             </div>
         </section>
     </main>
@@ -426,6 +426,7 @@
             <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
             <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
             <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+            <a href="https://letterboxd.com/jadedbutter/" target="_blank" class="social-icon">Letterboxd</a>
         </div>
         <div class="footer-bts-wrapper">
             <span class="bts-label">Behind The Scenes →</span>
@@ -463,22 +464,58 @@
     </footer>
 
     <script>
-        // Show notification if redirected back with ?sent=true
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const banner = document.getElementById('notificationBanner');
+        let bannerTimer;
+
+        function showBanner() {
+            clearTimeout(bannerTimer);
+            banner.classList.add('show');
+            bannerTimer = setTimeout(() => {
+                banner.classList.remove('show');
+            }, 5300);
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Basic validation (browser handles required fields, but just in case)
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.reset();
+                    showBanner();
+                } else {
+                    alert('Something went wrong. Please try again or email me directly.');
+                }
+            } catch (err) {
+                alert('Something went wrong. Please try again or email me directly.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        // If user lands here via an old ?sent=true link, still show the banner
         (function () {
             const params = new URLSearchParams(window.location.search);
             if (params.get('sent') === 'true') {
-                const banner = document.getElementById('notificationBanner');
-                // Slight delay so the slide-down is visible
-                setTimeout(() => {
-                    banner.classList.add('show');
-                }, 300);
-
-                // Auto-hide after 5 seconds
-                setTimeout(() => {
-                    banner.classList.remove('show');
-                }, 5300);
-
-                // Clean the URL so refresh doesn't re-show the message
+                setTimeout(showBanner, 300);
                 window.history.replaceState({}, '', window.location.pathname);
             }
         })();

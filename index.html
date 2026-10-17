@@ -268,6 +268,7 @@
             <a href="https://www.instagram.com/jaded.butter/" target="_blank" class="social-icon">Instagram</a>
             <a href="mailto:jadebutner@gmail.com" class="social-icon">Email</a>
             <a href="https://www.linkedin.com/in/jack-butner-2453b031a/" target="_blank" class="social-icon">LinkedIn</a>
+            <a href="https://letterboxd.com/jadedbutter/" target="_blank" class="social-icon">Letterboxd</a>
         </div>
         <div class="footer-bts-wrapper">
             <span class="bts-label">Behind The Scenes →</span>
@@ -325,7 +326,7 @@
                 genre: null,
                 releaseDate: "June, 2026",
                 stage: null,
-                roles: ["Editor"],
+                roles: ["Editor", "Producer"],
                 logline: null,
                 watchUrl: "https://www.youtube.com/watch?v=6YN8ADAvQJQ",
                 poster: "images/Impavido-Square.jpg",
@@ -472,7 +473,7 @@
             const keywords = roleMapping[roleFilter];
             if (!keywords) return true;
             return production.roles.some(role => 
-                keywords.some(keyword => role.toLowerCase().includes(keyword.toLowerCase()))
+                keywords.some(keyword => role.toLowerCase() === keyword.toLowerCase())
             );
         }
 
@@ -558,7 +559,7 @@
                         <div class="modal-roles">
                             <strong>My Role:</strong> ${p.roles.join(' · ')}
                         </div>
-                        ${p.logline ? `<div class="modal-logline"><strong>Logline:</strong> ${p.logline}</div>` : ''}
+                        ${p.logline ? `<div class="modal-logline"> ${p.logline}</div>` : ''}
                         ${p.watchUrl ? `<div class="modal-watch"><a href="${p.watchUrl}" target="_blank" class="btn-primary">Watch Now</a></div>` : ''}
                     </div>
                 </div>
